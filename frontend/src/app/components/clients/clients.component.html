@@ -1,3 +1,85 @@
 <app-top></app-top>
-<main>content CLIENTS</main>
+
+<main class="container my-5">
+
+    <h1 class="text-center">Plantalla inicio clientes</h1>
+    <h2>Crear un nuevo clientes</h2>
+
+    <form #clientsForm="ngForm" (ngSubmit)="handleSubmitClient(clientsForm)">
+      <input type="hidden" name="_id" [(ngModel)]="clientService.selectedClient._id">  
+      <div class="mb-3">
+          <label for="name" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" [(ngModel)]="clientService.selectedClient.name">
+          
+        </div>
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Apellido</label>
+          <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="clientService.selectedClient.lastName">
+        </div>
+        <div class="mb-3">
+            <label for="userName" class="form-label">Usuario</label>
+            <input type="text" class="form-control" id="userName" name="userName" [(ngModel)]="clientService.selectedClient.userName">
+          </div>
+
+          <div class="mb-3">
+            <label for="phone" class="form-label">Telefono</label>
+            <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="clientService.selectedClient.phone">
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo electronico</label>
+            <input type="text" class="form-control" id="email" name="email" [(ngModel)]="clientService.selectedClient.email">
+          </div>
+
+          <div class="mb-3">
+            <label for="birthday" class="form-label">Fecha Cumpleaños</label>
+            <input type="date" class="form-control" id="birthday" name="birthday" [(ngModel)]="clientService.selectedClient.birthday">
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="clientService.selectedClient.password">
+          </div>
+          
+
+        <div class="mb-3">
+            <label for="preferences" class="form-label">Preferencias</label>
+            <input type="text" class="form-control" id="preferences" name="preferences" [(ngModel)]="clientService.selectedClient.preferences">
+          </div>
+
+          <div class="mb-3">
+            <label for="hasCreditCard" class="form-label">Tiene tarjeta de credito</label>
+            <input type="text" class="form-control" id="hasCreditCard" name="hasCreditCard" [(ngModel)]="clientService.selectedClient.hasCreditCard">
+          </div>
+        
+      
+      <ng-container *ngIf=" clientService.selectedClient._id; else create">
+        <button type="submit" class="btn btn-warning">Actualizar Cliente</button>
+
+      </ng-container>
+      <ng-template #create>
+        <button type="submit" class="btn btn-primary">Crear Cliente</button>
+
+      </ng-template>
+      
+      </form>
+
+      <h2 class="mt-5">Nuestros clientes</h2>
+
+      <div class="d-flex flex-wrap">
+      <div class="card  mx-4 my-2" style="width: 18rem;" *ngFor="let client of clientService.clients">
+       <div class="card-body">
+          <h5 class="card-title">Name: {{client.name}} {{client.lastName}}</h5>
+          <p class="card-text">Email: {{client.email}}.</p>
+          <p class="card-text">Phone: {{client.phone}}.</p>
+          <p class="card-text">Preferences: {{client.preferences}}</p>
+          <p class="card-text">Birthday: {{client.birthday}}</p>
+          <button type="button" class="btn btn-info mx-3 mb-2" (click)="editClient(client)">Edit Client</button>
+          <button type="button" class="btn btn-danger mx-3" (click)="removeClient(client._id)">Delete Client</button>
+        </div>
+      </div>
+    </div>
+
+</main>
+
 <app-bottom></app-bottom>
