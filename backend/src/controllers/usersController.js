@@ -34,6 +34,7 @@ const usersController = {
       const token = await getToken({
         id: userCreated._id,
         userName: userCreated.userName,
+        firstName: userCreated.firstName
       });
       response.json({ message: `user created correctly`, token });
     } catch (error) {

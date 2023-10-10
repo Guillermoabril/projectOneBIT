@@ -15,7 +15,7 @@ const loginController = {
         if (isValidPassword) {
           const token = await getToken({
             id: userFound._id,
-            name: userFound.name,
+            name: userFound.firstName,
           });
           response.json(token);
         } else {
